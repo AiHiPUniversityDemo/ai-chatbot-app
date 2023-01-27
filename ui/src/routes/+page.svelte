@@ -6,7 +6,7 @@
         event.preventDefault();
         aiResponse = "Loading...";
         try {
-            const response = await fetch('http://localhost:5001', {
+            const response = await fetch('https://ai-chatbot-app-server.onrender.com', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ prompt }),
