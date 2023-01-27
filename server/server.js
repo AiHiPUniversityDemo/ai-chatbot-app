@@ -11,7 +11,7 @@ dotenv.config()
 
 //Openai API wrapper function which accepts API KEY as object parameter
 const configuration = new Configuration({
-  apiKey: ({}).OPENAI_API_KEY,
+  apiKey: process.env.OPENAI_API_KEY,
 });
 
 
@@ -80,7 +80,7 @@ app.post('/', async (req, res) => {
     //with a status of 500 if there is any error caught in try block.
   } catch (error) {
     console.error(error)
-    res.status(500).send(error || 'Something went wrong communicating with Ai Foskaay');
+    res.status(5001).send(error || 'Something went wrong communicating with Ai Foskaay');
   }
 })
 

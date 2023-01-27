@@ -1,2 +1,32 @@
-<h1>Welcome to SvelteKit ChatGPT Clone!!!</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script>
+    let prompt = '';
+    let aiResponse = '';
+
+    async function handleSubmit(event) {
+        event.preventDefault();
+        aiResponse = "Loading...";
+        try {
+            const response = await fetch('http://localhost:5001', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ prompt }),
+            });
+            let data = await response.json();
+            aiResponse = data.ai;
+        } catch (error) {
+            console.error(error);
+            aiResponse = "Error communicating with AI. Please try again later.";
+        }
+    }
+</script>
+
+<div>
+    <form on:submit={handleSubmit}>
+        <input bind:value={prompt} placeholder="Enter your prompt here" />
+        <button type="submit">Submit</button>
+    </form>
+    <h2>User prompt: {prompt}</h2>
+    <h2>AI response: {aiResponse}</h2>
+</div>
+
+    
